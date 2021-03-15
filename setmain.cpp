@@ -17,5 +17,9 @@ int main()
     s.remove(10);
     s.DFS(true);
     s.NFS(true);
+    s.insert(123);
+    cout << s.size_of_tree()<<endl;
+    cout << s.height_of_tree()<<endl;
+
 }
 

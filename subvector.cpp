@@ -15,6 +15,11 @@ public:
         this ->capacity = 0;
     }
 
+    ~subvector()
+    {
+        if (this->capacity > 0) delete[] this->mas;
+    }
+
     unsigned int get_cap()
     {
         return this ->capacity;
