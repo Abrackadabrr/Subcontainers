@@ -1,12 +1,14 @@
-﻿#include <iostream>
+#include <iostream>
+#include <string>
 using namespace std;
 
+template<typename type>
 class subvector
 {
 private:
-	int* mas;
-	unsigned int top;
-	unsigned int capacity;
+    type* mas;
+    unsigned int top;
+    unsigned int capacity;
 public:
     subvector()
     {
@@ -30,11 +32,11 @@ public:
         return this ->top;
     }
 
-    bool push_back(int d)
+    bool push_back(type d)
     {
         if (this ->top + 1 > this ->capacity)
         {
-            int* p = new int[this ->capacity + 1];
+            type* p = new type[this ->capacity + 1];
             for (int i = 0; i < this ->capacity; i++)
             {
                 *(p + i) = *(this -> mas + i);
@@ -58,7 +60,7 @@ public:
         if (this ->top > 0)
         {
             for (int i = 0; i< this -> top; i++)
-            cout << this -> mas [i]<<" ";
+                cout << this -> mas [i]<<" ";
             cout<<endl;
         }
         else cout << "empty subvector";
@@ -69,8 +71,7 @@ public:
         if (this ->top > 0)
         {
             this ->top--;
-            int e = *(this ->mas + this ->top);
-            return e;
+            return 1;
         }
         else
         {
@@ -80,8 +81,8 @@ public:
 
     bool resize(unsigned int new_capacity)
     {
-        if (new_capacity > 0) {
-            int* p = new int[new_capacity];
+        if (new_capacity > 0 && new_capacity != 1) {
+            type* p = new type[new_capacity];
             int size = 0;
             if (new_capacity > this->top) size = this->top; else size = new_capacity;
             for (int i = 0; i < size ; i++)
@@ -110,7 +111,7 @@ public:
         {
             if (this ->top > 0)
             {
-                int* p = new int[this ->top];
+                type* p = new type[this ->top];
                 for (int i = 0; i < this ->top; i++)
                 {
                     *(p + i) = *(this ->mas + i);
@@ -137,7 +138,7 @@ public:
 
 int mini_profiler()
 {
-    subvector s1;
+    subvector<int> s1;
     //check push
     s1.push_back(2);
     s1.push_back(3);
@@ -170,8 +171,45 @@ int mini_profiler()
     return 0;
 }
 
+// закомменченный класс мячиков для проверки шаблона (работает)
+// переопределяется только отператор <<
+/*
+class ball{
+
+    friend ostream& operator << (ostream& is, ball b);
+
+private:
+    int radius;
+    string color;
+public:
+    ball(int r,string c)
+    {
+        radius = r;
+        color = c;
+    }
+    ball():ball(0, "nope"){}
+};
+*/
 int main()
 {
-    mini_profiler();
-}
+    subvector<char> big_alfabet;
+    for (int i = 0; i < 26; i++){
+        big_alfabet.push_back('A'+i);
+    }
+    big_alfabet.print();
 
+    /*subvector<ball> balls;
+    for (int i = 0; i < 26; i++){
+        ball a = {i,"red"};
+        balls.push_back(a);
+    }
+    balls.print(); */
+
+    return 0;
+}
+/*
+ostream& operator << (ostream& is, ball b)
+{
+    is << "Ball: 1)radius is " << b.radius <<  endl << "    2)color is " << b.color <<endl;
+}
+*/
