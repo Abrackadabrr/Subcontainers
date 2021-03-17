@@ -22,14 +22,14 @@ int main()
     cout << endl;
     //checking remove
 
-    /*tree.remove(60);
+    tree.remove(60);
     tree.remove(90);
     tree.remove(1);
     tree.remove(60);
     tree.remove(3);
     tree.remove(60);
 
-    tree.DFS();*/
+    tree.DFS(true);
 
     //checking find
 
